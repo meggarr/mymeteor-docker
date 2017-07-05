@@ -22,7 +22,7 @@ meteor npm install
 
 # build the bundle
 printf "\n[-] Building Meteor application...\n\n"
-meteor build --directory $APP_BUNDLE_DIR
+meteor build --debug --directory $APP_BUNDLE_DIR
 
 # run npm install in bundle
 printf "\n[-] Running npm install in the server bundle...\n\n"
