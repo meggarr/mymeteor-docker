@@ -25,8 +25,13 @@ rm -rf /tmp/*
 
 # remove npm
 npm cache clean
-rm -rf /opt/nodejs/bin/npm
-rm -rf /opt/nodejs/lib/node_modules/npm/
+rm -rf /usr/local/bin/npm
+rm -rf /usr/local/lib/node_modules
+
+# remove yarn
+rm -rf /usr/local/bin/yarn
+rm -rf /usr/local/bin/yarnpkg
+rm -rf /opt/yarn
 
 # remove os dependencies
 apt-get purge -y --auto-remove build-essential bsdtar bzip2 curl git python 

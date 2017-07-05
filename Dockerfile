@@ -1,7 +1,5 @@
-FROM debian:jessie
-MAINTAINER Jeremy Shimko <jeremy.shimko@gmail.com>
-
-RUN groupadd -r node && useradd -m -g node node
+FROM node:4.8.3-slim
+MAINTAINER Richard Meng <rmeng@calix.com>
 
 # Gosu
 ENV GOSU_VERSION 1.10
@@ -34,9 +32,6 @@ RUN chmod -R 750 $BUILD_SCRIPTS_DIR
 ARG CMDCTR_BRANCH
 ENV CMDCTR_BRANCH ${CMDCTR_BRANCH:-docker-support}
 
-ARG NODE_VERSION
-ENV NODE_VERSION ${NODE_VERSION:-4.8.3}
-
 
 # optionally custom apt dependencies at app build time
 #ONBUILD RUN if [ "$APT_GET_INSTALL" ]; then apt-get update && apt-get install -y $APT_GET_INSTALL; fi
@@ -53,7 +48,6 @@ RUN cd $APP_SOURCE_DIR && \
 ENV CMDCTR_APP_DIR $APP_SOURCE_DIR/cmdctr-app
 RUN cd $CMDCTR_APP_DIR && \
     $BUILD_SCRIPTS_DIR/install-deps.sh && \
-    $BUILD_SCRIPTS_DIR/install-node.sh && \
     $BUILD_SCRIPTS_DIR/install-meteor.sh && \
     $BUILD_SCRIPTS_DIR/build-meteor.sh && \
     $BUILD_SCRIPTS_DIR/post-build-cleanup.sh
